@@ -116,6 +116,8 @@ html {
   scroll-behavior: smooth;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
+  overflow-x: hidden;
+  max-width: 100%;
 }
 
 body {
@@ -124,6 +126,8 @@ body {
   color: var(--text-primary);
   line-height: 1.6;
   overflow-x: hidden;
+  max-width: 100%;
+  width: 100%;
   transition: background-color var(--transition-normal), color var(--transition-normal);
   display: flex;
   flex-direction: column;
@@ -267,7 +271,7 @@ button {
 .header-container nav {
   flex: 1;
   min-width: 0;
-  overflow: hidden;
+  overflow: visible;
   display: flex;
   justify-content: center;
 }
@@ -623,6 +627,24 @@ button {
   }
 }
 
+/* Narrow desktop: shrink nav gap and font so all links fit */
+@media (min-width: 992px) and (max-width: 1200px) {
+  .nav-menu {
+    gap: 16px;
+  }
+  .nav-link {
+    font-size: 0.8rem;
+    letter-spacing: 0;
+  }
+  .logo {
+    font-size: 1.4rem;
+  }
+  .cta-btn {
+    padding: 8px 12px;
+    font-size: 0.75rem;
+  }
+}
+
 /* ==========================================================================
    SPA Content Router Layouts
    ========================================================================== */
@@ -677,16 +699,21 @@ button {
   position: relative;
   z-index: 2;
   padding: 0 24px;
+  width: 100%;
+  max-width: 100%;
+  overflow: hidden;
 }
 
 .inner-hero h1 {
-  font-size: 3rem;
+  font-size: clamp(1.5rem, 6vw, 3rem);
   margin-bottom: 12px;
   background: linear-gradient(135deg, var(--text-primary) 30%, var(--accent) 100%);
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
   text-transform: uppercase;
   letter-spacing: var(--tracking-wide);
+  word-break: break-word;
+  overflow-wrap: break-word;
 }
 
 .inner-hero-breadcrumbs {
@@ -1034,6 +1061,9 @@ button {
   max-width: 600px;
   margin: 0 auto 50px;
   padding: 0 24px;
+  width: 100%;
+  box-sizing: border-box;
+  overflow: hidden;
 }
 
 .section-subtitle {
@@ -1048,9 +1078,10 @@ button {
 }
 
 .section-title {
-  font-size: 2.5rem;
+  font-size: clamp(1.5rem, 5vw, 2.5rem);
   margin-bottom: 16px;
   text-transform: uppercase;
+  word-break: break-word;
 }
 
 .section-desc {
@@ -1664,6 +1695,8 @@ button {
   max-width: 1000px;
   margin: 0 auto;
   padding: 0 24px;
+  width: 100%;
+  box-sizing: border-box;
 }
 
 .calculator-card {
@@ -1675,6 +1708,8 @@ button {
   display: grid;
   grid-template-columns: 1fr 1fr;
   gap: 40px;
+  width: 100%;
+  min-width: 0;
 }
 
 @media (max-width: 768px) {
@@ -2836,7 +2871,7 @@ textarea.form-control {
     grid-template-columns: repeat(2, 1fr);
   }
   .inner-hero h1 {
-    font-size: 2.5rem;
+    font-size: clamp(1.5rem, 5vw, 2.5rem);
   }
 }
 
@@ -2852,7 +2887,7 @@ textarea.form-control {
     min-height: 200px;
   }
   .inner-hero h1 {
-    font-size: 2.1rem;
+    font-size: clamp(1.4rem, 5.5vw, 2.1rem);
   }
   .nav-menu {
     max-width: 85vw; /* Enforce it fits all compact views */
@@ -2861,7 +2896,7 @@ textarea.form-control {
 
 @media (max-width: 480px) {
   .inner-hero h1 {
-    font-size: 1.75rem;
+    font-size: clamp(1.2rem, 5vw, 1.75rem);
   }
   .slide-title {
     font-size: 2.25rem !important;
@@ -2876,7 +2911,7 @@ textarea.form-control {
 
 @media (max-width: 360px) {
   .inner-hero h1 {
-    font-size: 1.5rem;
+    font-size: clamp(1.1rem, 4.5vw, 1.5rem);
   }
   .slide-title {
     font-size: 1.95rem !important;
@@ -3697,7 +3732,7 @@ textarea.form-control {
               <div class="contact-info-icon"><i class="fa-solid fa-location-dot"></i></div>
               <div class="contact-info-details">
                 <h3>Showroom Location</h3>
-                <p>482 Hyperion Boulevard,<br>Las Vegas, Nevada, 89101</p>
+                <p><a href="#contact" onclick="event.preventDefault(); state.scrollToMap=true; window.location.hash='#contact';" style="color: var(--text-secondary); text-decoration: none; cursor: pointer;">482 Hyperion Boulevard,<br>Las Vegas, Nevada, 89101</a></p>
               </div>
             </div>
             <div class="contact-info-card">
@@ -3884,9 +3919,9 @@ textarea.form-control {
       
       <div class="footer-col-contact">
         <h3 class="footer-title">Connect</h3>
-        <p><i class="fa-solid fa-location-dot"></i> 482 Hyperion Boulevard, Las Vegas, Nevada</p>
+        <p><i class="fa-solid fa-location-dot"></i> <a href="#contact" onclick="event.preventDefault(); state.scrollToMap=true; window.location.hash='#contact';" style="color: var(--text-secondary); text-decoration: none; cursor: pointer;">482 Hyperion Boulevard, Las Vegas, Nevada</a></p>
         <p><i class="fa-solid fa-phone"></i> <a href="tel:+17025550199">+1 (702) 555-0199</a></p>
-        <p><i class="fa-solid fa-envelope"></i> <a href="mailto:contact@velocemotors.com">contact@velocemotors.com</a></p>
+        <p><i class="fa-solid fa-envelope"></i> <a href="mailto:velocemotors@gmail.com">velocemotors@gmail.com</a></p>
         
         <!-- Payment Methods removed from footer -->
 
@@ -3934,6 +3969,7 @@ textarea.form-control {
 const state = {
   theme: 'dark',
   reservedVehicle: null,
+  scrollToMap: false,
   // Active inventory listings
   cars: {
     'electra-s':      { id: 'electra-s',      name: 'Veloce Electra S',       price: 189900, img: 'https://images.unsplash.com/photo-1617788138017-80ad40651399?auto=format&fit=crop&w=600&q=80', hp: '1,020 HP', accel: '1.99s', motor: 'Electric' },
@@ -4062,6 +4098,15 @@ function initRouter() {
 
     if (typeof AOS !== 'undefined') {
       setTimeout(() => AOS.refresh(), 150);
+    }
+
+    // Scroll to map if flagged (address link clicked)
+    if (state.scrollToMap) {
+      state.scrollToMap = false;
+      setTimeout(() => {
+        const mapEl = document.querySelector('.map-container');
+        if (mapEl) mapEl.scrollIntoView({ behavior: 'smooth' });
+      }, 200);
     }
   };
 
