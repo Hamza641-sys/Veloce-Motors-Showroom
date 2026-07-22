@@ -16,7 +16,7 @@
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=Outfit:wght@600;700;800;900&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.6.0/css/all.min.css">
   
   <!-- AOS Animations Library CSS -->
   <link rel="stylesheet" href="https://unpkg.com/aos@next/dist/aos.css" />
@@ -263,10 +263,13 @@ button {
   gap: 12px;
 }
 
-/* Prevent nav from overflowing on mid-size screens */
+/* Nav takes all available space and centers the links */
 .header-container nav {
+  flex: 1;
   min-width: 0;
   overflow: hidden;
+  display: flex;
+  justify-content: center;
 }
 
 .logo {
@@ -288,8 +291,9 @@ button {
 .nav-menu {
   display: flex;
   align-items: center;
-  gap: 18px;
+  gap: 30px;
   list-style: none;
+  justify-content: center;
 }
 
 .nav-link {
@@ -560,7 +564,7 @@ button {
     flex-direction: column;
     justify-content: flex-start;
     align-items: flex-start;
-    padding: 90px 32px 40px;
+    padding: 65px 32px 40px;
     gap: 4px;
     z-index: 1001;
     transition: right var(--transition-normal) cubic-bezier(0.16, 1, 0.3, 1);
@@ -2833,6 +2837,12 @@ textarea.form-control {
   }
   .inner-hero h1 {
     font-size: 2.5rem;
+  }
+}
+
+@media (max-width: 576px) {
+  .gallery-grid {
+    grid-template-columns: 1fr !important;
   }
 }
 
