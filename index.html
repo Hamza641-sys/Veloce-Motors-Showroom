@@ -184,7 +184,7 @@ button {
 }
 
 /* ==========================================================================
-   Page Loader Overlay
+   Premium Luxury Loader - Veloce Motors
    ========================================================================== */
 #loader {
   position: fixed;
@@ -192,13 +192,25 @@ button {
   left: 0;
   width: 100%;
   height: 100vh;
-  background-color: var(--bg-primary);
+  background: radial-gradient(ellipse at center, rgba(0, 240, 255, 0.03) 0%, var(--bg-primary) 70%), var(--bg-primary);
   display: flex;
   flex-direction: column;
   justify-content: center;
   align-items: center;
   z-index: 9999;
-  transition: opacity var(--transition-slow) ease, visibility var(--transition-slow) ease;
+  transition: opacity 1s ease, visibility 1s ease;
+  overflow: hidden;
+}
+
+#loader::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(45deg, transparent 30%, rgba(0, 240, 255, 0.02) 50%, transparent 70%);
+  animation: shimmer 3s ease-in-out infinite;
 }
 
 #loader.fade-out {
@@ -206,31 +218,255 @@ button {
   visibility: hidden;
 }
 
-.loader-spinner {
-  width: 60px;
-  height: 60px;
-  border: 4px solid var(--border);
-  border-top-color: var(--accent);
-  border-radius: var(--border-radius-full);
-  animation: spin 1s cubic-bezier(0.5, 0.1, 0.5, 0.9) infinite;
+/* Hexagon Badge Container */
+.loader-badge {
+  position: relative;
+  width: 120px;
+  height: 120px;
+  margin-bottom: 50px;
+  animation: badgePulse 2s ease-in-out infinite;
+}
+
+/* Outer Hexagon Ring */
+.loader-hex-outer {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  border: 2px solid var(--border);
+  clip-path: polygon(30% 0%, 70% 0%, 100% 50%, 70% 100%, 30% 100%, 0% 50%);
+  animation: hexRotate 8s linear infinite;
+}
+
+/* Inner Hexagon Ring */
+.loader-hex-inner {
+  position: absolute;
+  width: 85%;
+  height: 85%;
+  top: 7.5%;
+  left: 7.5%;
+  border: 2px solid var(--accent);
+  clip-path: polygon(30% 0%, 70% 0%, 100% 50%, 70% 100%, 30% 100%, 0% 50%);
+  box-shadow: 0 0 20px rgba(0, 240, 255, 0.3), inset 0 0 20px rgba(0, 240, 255, 0.1);
+  animation: hexRotate 6s linear infinite reverse;
+}
+
+/* Center Car Icon */
+.loader-car-icon {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  font-size: 3rem;
+  color: var(--accent);
+  text-shadow: 0 0 30px rgba(0, 240, 255, 0.5);
+  animation: iconFloat 3s ease-in-out infinite;
+  z-index: 2;
+}
+
+/* Veloce Brand */
+.loader-brand {
+  display: flex;
+  align-items: center;
+  gap: 12px;
   margin-bottom: 20px;
-  box-shadow: var(--glow);
+  opacity: 0;
+  animation: fadeSlideUp 1s ease-out 0.3s forwards;
+}
+
+.loader-brand-icon {
+  font-size: 2rem;
+  color: var(--accent);
+  text-shadow: var(--glow);
 }
 
 .loader-text {
   font-family: var(--font-display);
-  font-size: 1.5rem;
-  letter-spacing: var(--tracking-wider);
+  font-size: 2.5rem;
+  letter-spacing: 0.15em;
   text-transform: uppercase;
-  color: var(--text-primary);
-  font-weight: 800;
-  background: linear-gradient(135deg, var(--text-primary) 30%, var(--accent) 100%);
+  font-weight: 900;
+  background: linear-gradient(135deg, #ffffff 0%, var(--accent) 50%, #ffffff 100%);
+  background-size: 200% 100%;
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  animation: textShine 3s ease-in-out infinite;
+}
+
+[data-theme="light"] .loader-text {
+  background: linear-gradient(135deg, var(--text-primary) 0%, var(--accent) 50%, var(--text-primary) 100%);
+  background-size: 200% 100%;
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
 }
 
-@keyframes spin {
-  to { transform: rotate(360deg); }
+/* Elite Tagline */
+.loader-tagline {
+  font-family: var(--font-body);
+  font-size: 0.9rem;
+  color: var(--text-secondary);
+  letter-spacing: 0.3em;
+  text-transform: uppercase;
+  font-weight: 300;
+  margin-bottom: 50px;
+  opacity: 0;
+  animation: fadeSlideUp 1s ease-out 0.6s forwards;
+  text-align: center;
+  width: 100%;
+  padding: 0 24px;
+}
+
+/* Luxury Progress Bar */
+.loader-progress-container {
+  width: 280px;
+  opacity: 0;
+  animation: fadeSlideUp 1s ease-out 0.9s forwards;
+}
+
+.loader-progress-track {
+  width: 100%;
+  height: 2px;
+  background: var(--border);
+  position: relative;
+  overflow: hidden;
+  margin-bottom: 12px;
+}
+
+.loader-progress-fill {
+  height: 100%;
+  background: linear-gradient(90deg, transparent 0%, var(--accent) 50%, transparent 100%);
+  background-size: 200% 100%;
+  width: 100%;
+  animation: progressSlide 1.5s ease-in-out infinite;
+  box-shadow: 0 0 10px var(--accent);
+}
+
+.loader-status-text {
+  font-family: var(--font-display);
+  font-size: 0.7rem;
+  color: var(--text-muted);
+  text-transform: uppercase;
+  letter-spacing: 0.2em;
+  text-align: center;
+}
+
+/* Animated Corner Brackets */
+.loader-corner {
+  position: absolute;
+  width: 40px;
+  height: 40px;
+  opacity: 0.4;
+}
+
+.loader-corner-tl {
+  top: 40px;
+  left: 40px;
+  border-top: 2px solid var(--accent);
+  border-left: 2px solid var(--accent);
+  animation: cornerPulse 2s ease-in-out infinite;
+}
+
+.loader-corner-tr {
+  top: 40px;
+  right: 40px;
+  border-top: 2px solid var(--accent);
+  border-right: 2px solid var(--accent);
+  animation: cornerPulse 2s ease-in-out 0.5s infinite;
+}
+
+.loader-corner-bl {
+  bottom: 40px;
+  left: 40px;
+  border-bottom: 2px solid var(--accent);
+  border-left: 2px solid var(--accent);
+  animation: cornerPulse 2s ease-in-out 1s infinite;
+}
+
+.loader-corner-br {
+  bottom: 40px;
+  right: 40px;
+  border-bottom: 2px solid var(--accent);
+  border-right: 2px solid var(--accent);
+  animation: cornerPulse 2s ease-in-out 1.5s infinite;
+}
+
+/* ========== ANIMATIONS ========== */
+
+@keyframes badgePulse {
+  0%, 100% { 
+    transform: scale(1); 
+    filter: drop-shadow(0 0 10px rgba(0, 240, 255, 0.3));
+  }
+  50% { 
+    transform: scale(1.05); 
+    filter: drop-shadow(0 0 25px rgba(0, 240, 255, 0.6));
+  }
+}
+
+@keyframes hexRotate {
+  from { 
+    transform: rotate(0deg); 
+  }
+  to { 
+    transform: rotate(360deg); 
+  }
+}
+
+@keyframes iconFloat {
+  0%, 100% { 
+    transform: translate(-50%, -50%) translateY(0px); 
+  }
+  50% { 
+    transform: translate(-50%, -50%) translateY(-8px); 
+  }
+}
+
+@keyframes textShine {
+  0% { 
+    background-position: -200% 0; 
+  }
+  100% { 
+    background-position: 200% 0; 
+  }
+}
+
+@keyframes fadeSlideUp {
+  from {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes progressSlide {
+  0% { 
+    background-position: -200% 0; 
+  }
+  100% { 
+    background-position: 200% 0; 
+  }
+}
+
+@keyframes shimmer {
+  0%, 100% { 
+    transform: translateX(-100%); 
+  }
+  50% { 
+    transform: translateX(100%); 
+  }
+}
+
+@keyframes cornerPulse {
+  0%, 100% { 
+    opacity: 0.2; 
+    transform: scale(1); 
+  }
+  50% { 
+    opacity: 0.8; 
+    transform: scale(1.1); 
+  }
 }
 
 /* ==========================================================================
@@ -2929,10 +3165,39 @@ textarea.form-control {
 </head>
 <body>
 
-  <!-- Page Loader Overlay -->
+  <!-- Premium Luxury Loader -->
   <div id="loader">
-    <div class="loader-spinner"></div>
-    <div class="loader-text">Veloce</div>
+    <!-- Corner Brackets (luxury frame) -->
+    <div class="loader-corner loader-corner-tl"></div>
+    <div class="loader-corner loader-corner-tr"></div>
+    <div class="loader-corner loader-corner-bl"></div>
+    <div class="loader-corner loader-corner-br"></div>
+
+    <!-- Hexagon Badge with Car -->
+    <div class="loader-badge">
+      <div class="loader-hex-outer"></div>
+      <div class="loader-hex-inner"></div>
+      <div class="loader-car-icon">
+        <i class="fa-solid fa-car-side"></i>
+      </div>
+    </div>
+
+    <!-- Brand Name -->
+    <div class="loader-brand">
+      <span class="loader-brand-icon"><i class="fa-solid fa-gauge-high"></i></span>
+      <span class="loader-text">Veloce</span>
+    </div>
+
+    <!-- Tagline -->
+    <div class="loader-tagline">Elite Luxury &amp; Supercar Showroom</div>
+
+    <!-- Sleek Progress Bar -->
+    <div class="loader-progress-container">
+      <div class="loader-progress-track">
+        <div class="loader-progress-fill"></div>
+      </div>
+      <div class="loader-status-text">Initializing Showroom Experience</div>
+    </div>
   </div>
 
   <!-- Sticky Glassmorphic Header -->
@@ -4010,7 +4275,7 @@ function initLoader() {
       setTimeout(() => {
         loader.classList.add('fade-out');
         setTimeout(() => { loader.style.display = 'none'; }, 600);
-      }, 400);
+      }, 800);
     });
   }
 }
