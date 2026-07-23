@@ -2,7 +2,7 @@
 
 > Elite Luxury & Supercar Showroom — A fully responsive single-page application built with vanilla HTML, CSS, and JavaScript.
 
-**Live Site:** [hamza641-sys.github.io](https://hamza641-sys.github.io)
+**Live Site:** [hamza641-sys.github.io](https://hamza641-sys.github.io/Veloce-Motors-Showroom/)
 
 ---
 
