@@ -10,7 +10,7 @@
 
 ```
 AutoMobile Showroom/
-├── index.html        → Main HTML structure (SPA layout)
+├── index.html        → Main HTML structure with all sections
 ├── style.css         → All styles, themes, animations, responsive breakpoints
 ├── script.js         → All JavaScript: routing, slider, calculator, forms
 ├── README.md         → Project documentation
@@ -79,7 +79,7 @@ No build tools required. Just open `index.html` in any modern browser:
 
 ```bash
 # Clone the repo
-git clone https://github.com/hamza641-sys/AutoMobile-Showroom.git
+git clone https://github.com/Hamza641-sys/Veloce-Motors-Showroom.git
 
 # Open directly
 start index.html
